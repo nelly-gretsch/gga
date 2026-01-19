@@ -1,0 +1,229 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+App:
+  Properties:
+    OnStart: |-
+      =ClearCollect(colTimeframes,
+          { Value:"Today",        Start: Today() },
+          { Value:"Last 7 days",  Start: DateAdd(Today(), -7, TimeUnit.Days) },
+          { Value:"Last 30 days", Start: DateAdd(Today(), -30, TimeUnit.Days) },
+          { Value:"This month",   Start: Date(Year(Today()), Month(Today()), 1) },
+          { Value:"This year",    Start: Date(Year(Today()), 1, 1) },
+          { Value:"All",          Start: Blank() }
+      );
+      Set(varDefaultTF,  LookUp(colTimeframes, Value = "Last 30 days"));
+      Set(varSelectedTF, varDefaultTF);
+      Set(varTFInitDone, false);
+
+
+
+
+      // ===============================
+      // GGA Branding Colors — Variables
+      // ===============================
+
+      // Core brand anchors
+      Set(varForest,   ColorValue("#0B181B"));
+      Set(varSage,     ColorValue("#9EB8AB"));
+      Set(varSand,     ColorValue("#E6E5D8"));
+      Set(varMountain, ColorValue("#405C66"));
+      Set(varDesert,   ColorValue("#B35B30"));
+      Set(varSky,      ColorValue("#3D5282"));
+      Set(varNeon,     ColorValue("#FFFFFF"));
+
+      // Forest
+      Set(varForest100, ColorValue("#CED1D1"));
+      Set(varForest200, ColorValue("#9DA3A4"));
+      Set(varForest300, ColorValue("#6D7476"));
+      Set(varForest400, ColorValue("#3C4649"));
+      Set(varForest500, ColorValue("#0B181B"));
+      Set(varForest600, ColorValue("#091316"));
+      Set(varForest700, ColorValue("#070E10"));
+      Set(varForest800, ColorValue("#040A0B"));
+      Set(varForest900, ColorValue("#020505"));
+
+      // Mountain
+      Set(varMountain100, ColorValue("#D9DEE0"));
+      Set(varMountain200, ColorValue("#B3BEC2"));
+      Set(varMountain300, ColorValue("#8C9DA3"));
+      Set(varMountain400, ColorValue("#667D85"));
+      Set(varMountain500, ColorValue("#405C66"));
+      Set(varMountain600, ColorValue("#334A52"));
+      Set(varMountain700, ColorValue("#26373D"));
+      Set(varMountain800, ColorValue("#1A2529"));
+      Set(varMountain900, ColorValue("#0D1214"));
+
+      // Sage
+      Set(varSage100, ColorValue("#ECF1EE"));
+      Set(varSage200, ColorValue("#D8E3DD"));
+      Set(varSage300, ColorValue("#C5D4CD"));
+      Set(varSage400, ColorValue("#B1C6BC"));
+      Set(varSage500, ColorValue("#9EB8AB"));
+      Set(varSage600, ColorValue("#7E9389"));
+      Set(varSage700, ColorValue("#5F6E67"));
+      Set(varSage800, ColorValue("#3F4A44"));
+      Set(varSage900, ColorValue("#202522"));
+
+      // Sand
+      Set(varSand100, ColorValue("#FAFAF7"));
+      Set(varSand200, ColorValue("#F5F5EF"));
+      Set(varSand300, ColorValue("#F0EFE8"));
+      Set(varSand400, ColorValue("#EBEAE0"));
+      Set(varSand500, ColorValue("#E6E5D8"));
+      Set(varSand600, ColorValue("#B8B7AD"));
+      Set(varSand700, ColorValue("#8A8982"));
+      Set(varSand800, ColorValue("#5C5C56"));
+      Set(varSand900, ColorValue("#2E2E2B"));
+
+      // Desert
+      Set(varDesert100, ColorValue("#F0DED6"));
+      Set(varDesert200, ColorValue("#E1BDAC"));
+      Set(varDesert300, ColorValue("#D19D83"));
+      Set(varDesert400, ColorValue("#C27C59"));
+      Set(varDesert500, ColorValue("#B35B30"));
+      Set(varDesert600, ColorValue("#8F4926"));
+      Set(varDesert700, ColorValue("#6B371D"));
+      Set(varDesert800, ColorValue("#482413"));
+      Set(varDesert900, ColorValue("#24120A"));
+
+      // Sky
+      Set(varSky100, ColorValue("#D8DCE6"));
+      Set(varSky200, ColorValue("#B1BACD"));
+      Set(varSky300, ColorValue("#8B97B4"));
+      Set(varSky400, ColorValue("#64759B"));
+      Set(varSky500, ColorValue("#3D5282"));
+      Set(varSky600, ColorValue("#314268"));
+      Set(varSky700, ColorValue("#25314E"));
+      Set(varSky800, ColorValue("#182134"));
+      Set(varSky900, ColorValue("#0C101A"));
+
+      // ===============================
+      // App Fonts & Sizes — Variables
+      // ===============================
+
+      Set(varFontFamily, "Segoe UI"); // Global font family
+
+      Set(varFontSizeLarge, 24); // Large font (Headings)
+      Set(varFontSizeMedium, 18); // Medium font (Subheadings, body text)
+      Set(varFontSizeSmall, 12); // Small font (Captions, labels)
+      Set(varFontSizeH1, 36); // Heading 1 (Largest)
+      Set(varFontSizeH2, 30); // Heading 2
+      Set(varFontSizeH3, 24); // Heading 3
+
+      // ===============================
+      // Padding & Margin — Variables
+      // ===============================
+
+      Set(varPaddingLarge, 20); // Large Padding
+      Set(varPaddingMedium, 15); // Medium Padding
+      Set(varPaddingSmall, 10); // Small Padding
+
+      Set(varMarginLarge, 30); // Large Margin
+      Set(varMarginMedium, 20); // Medium Margin
+      Set(varMarginSmall, 10); // Small Margin
+
+      // ===============================
+      // Input Field Styling — Variables
+      // ===============================
+
+      Set(varInputFontSize, varFontSizeMedium); // Default input font size
+      Set(varInputFontColor, varForest); // Input text color
+      Set(varInputBorderColor, varForest200); // Default input border color
+      Set(varInputBorderRadius, 5); // Border radius for inputs
+      Set(varInputPadding, varPaddingMedium); // Padding inside inputs
+      Set(varInputHeight, 40); // Input height
+
+      // Placeholder Text Styling
+      Set(varInputPlaceholderColor, varForest200); // Placeholder text color
+
+      // Focused Input Styling
+      Set(varInputFocusBorderColor, varMountain); // Border color on focus
+
+      // Error Styling
+      Set(varInputErrorBorderColor, varDesert); // Border color on error
+      Set(varInputErrorTextColor, varDesert); // Error text color
+
+      // Success Styling
+      Set(varInputSuccessBorderColor, varSage); // Border color on success
+      Set(varInputSuccessTextColor, varSage); // Success text color
+
+      // ===============================
+      // Button Styling — Variables
+      // ===============================
+
+      Set(varButtonHeight, 50); // Button height
+      Set(varButtonFontSize, varFontSizeMedium); // Default button font size
+      Set(varButtonFontColor, varNeon); // Button text color
+      Set(varButtonColor, varMountain); // Default button color (Mountain)
+      Set(varButtonRadius, 100); // Pill-shaped button radius
+      Set(varButtonPadding, varPaddingMedium); // Button padding
+      Set(varButtonHoverColor, varForest); // Button hover color
+      Set(varButtonMargin, varMarginSmall); // Button margin
+
+      // ===============================
+      // Icon Styling — Variables
+      // ===============================
+
+      Set(varIconSizeLarge, 40); // Large icon size
+      Set(varIconSizeMedium, 30); // Medium icon size
+      Set(varIconSizeSmall, 20); // Small icon size
+      Set(varIconColor, varMountain); // Icon color
+      Set(varIconMargin, varMarginSmall); // Margin for icons
+
+
+
+      // Define color palette
+      Set(gblAppColors, {
+      Primary1: ColorValue("#405C66"),
+      Primary2: ColorValue("#0B181B"),
+      Secondary: ColorValue("#E6E5D8"),
+      Accent: ColorValue("#B35B30"),
+      Background: ColorValue("#F5F5EF")
+      });
+
+      // Define font styles
+      Set(gblAppFonts, {
+      Heading: "Georgia",
+      Body: "Lato",
+      Size: {
+      Small: 14,
+      Medium: 18,
+      Large: 24
+      }
+      });
+
+      // Define button styles
+      Set(gblAppStyles, {
+      ButtonPrimary: {
+      Fill: gblAppColors.Primary1,
+      Color: gblAppColors.Background,
+      BorderColor: gblAppColors.Primary1
+      },
+      ButtonSecondary: {
+      Fill: gblAppColors.Secondary,
+      Color: gblAppColors.Background,
+      BorderColor: gblAppColors.Secondary
+      }
+      });
+
+      // ===============================
+      // Daily Operations Checklist
+      // ===============================
+
+      Set(varCurrentShift, Blank());
+      ClearCollect(
+          colChecklistScreens,
+          { ScreenName: "Reception Setup", Screen: ReceptionSetupScreen },
+          { ScreenName: "Retail Area", Screen: RetailAreaScreen },
+          { ScreenName: "Training Bays", Screen: TrainingBaysScreen },
+          { ScreenName: "Lounge & Private Bays", Screen: LoungePrivateBaysScreen },
+          { ScreenName: "Facility Readiness", Screen: FacilityReadinessScreen }
+      );
+
+    Theme: =varBrandTheme

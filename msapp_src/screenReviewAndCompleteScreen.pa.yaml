@@ -1,0 +1,241 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  ReviewAndCompleteScreen:
+    Properties:
+      Fill: =RGBA(255, 255, 255, 1)
+      LoadingSpinnerColor: =varSky
+      OnVisible: =Reset(chkIncompleteConfirm)
+    Children:
+      - contPage:
+          Control: GroupContainer@1.4.0
+          Variant: AutoLayout
+          Properties:
+            Height: =App.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =20
+            Width: =App.Width
+          Children:
+            - contHeader:
+                Control: GroupContainer@1.4.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.Semilight
+                  Height: =75
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                  LayoutMaxHeight: =75
+                  LayoutMinHeight: =75
+                  Width: =App.Width
+                Children:
+                  - contHeaderLeft:
+                      Control: GroupContainer@1.4.0
+                      Variant: ManualLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Center
+                        Height: =75
+                        LayoutMaxWidth: =300
+                        LayoutMinHeight: =75
+                        Width: =App.Width
+                      Children:
+                        - logo:
+                            Control: Image@2.2.3
+                            Properties:
+                              Height: =47
+                              Image: ='app-icon-ball-checkout'
+                              Width: =47
+                              X: =15
+                              Y: =15
+                        - lblPageTitle:
+                            Control: Label@2.5.1
+                            Properties:
+                              AutoHeight: =true
+                              Color: =varSky
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              Size: =14
+                              Text: ="Review & Complete"
+                              Width: =220
+                              X: =80
+                              Y: =21
+                  - contHeaderRight:
+                      Control: GroupContainer@1.4.0
+                      Variant: ManualLayout
+                      Properties:
+                        Height: =75
+                        LayoutMaxWidth: =170
+                        LayoutMinHeight: =75
+                        PaddingRight: =20
+                        Width: =App.Width
+                      Children:
+                        - lblBack:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Right
+                              AutoHeight: =true
+                              Color: =varForest300
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              OnSelect: =Navigate(FacilityReadinessScreen, ScreenTransition.UnCover)
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =12
+                              Text: ="Back"
+                              Width: =Parent.Width-20
+                              X: =contHeaderRight.Width-Self.Width-20
+                              Y: =contHeaderRight.Height/2-10
+            - galReview:
+                Control: Gallery@2.15.0
+                Variant: BrowseLayout_Vertical_TwoTextVariant_pcfCore
+                Properties:
+                  BorderColor: =RGBA(243, 242, 241, 1)
+                  FillPortions: =1
+                  FocusedBorderColor: =RGBA(98, 100, 167, 1)
+                  FocusedBorderThickness: =2
+                  Items: =colChecklistScreens
+                  TemplatePadding: =15
+                  TemplateSize: =100
+                  Width: =App.Width
+                Children:
+                  - contRow:
+                      Control: GroupContainer@1.4.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.Semilight
+                        Height: =90
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =20
+                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                        PaddingLeft: =25
+                        PaddingRight: =25
+                        RadiusBottomLeft: =40
+                        RadiusBottomRight: =40
+                        RadiusTopLeft: =40
+                        RadiusTopRight: =40
+                        Width: =galReview.Width - 40
+                      Children:
+                        - lblScreenName:
+                            Control: Label@2.5.1
+                            Properties:
+                              AutoHeight: =true
+                              Color: =varForest
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Size: =12
+                              Text: =ThisItem.ScreenName
+                              Width: =Parent.Width * 0.4
+                        - lblStatus:
+                            Control: Label@2.5.1
+                            Properties:
+                              AutoHeight: =true
+                              Color: =If(
+                                  CountRows(
+                                      Filter(
+                                          ShiftChecklistItems,
+                                          Shift = varCurrentShift && ScreenName = ThisItem.ScreenName && CompletionStatus.Value = "Not Complete"
+                                      )
+                                  ) = 0,
+                                  varSage,
+                                  varDesert
+                              )
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Size: =12
+                              Text: =If(
+                                  CountRows(
+                                      Filter(
+                                          ShiftChecklistItems,
+                                          Shift = varCurrentShift && ScreenName = ThisItem.ScreenName && CompletionStatus.Value = "Not Complete"
+                                      )
+                                  ) = 0,
+                                  "Complete",
+                                  "Incomplete"
+                              )
+                              Width: =120
+                        - btnReview:
+                            Control: FluentV8/Button@1.5.13
+                            Properties:
+                              Alignment: =Align.Center
+                              BorderRadius: =100
+                              ButtonType: ='Button.ButtonType'.Secondary
+                              FillColor: =varSand
+                              FontSize: =11
+                              Height: =40
+                              HoverFillColor: =varForest200
+                              OnSelect: =Navigate(ThisItem.Screen, ScreenTransition.UnCover)
+                              Text: ="Review"
+                              Width: =110
+            - contConfirm:
+                Control: GroupContainer@1.4.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =10
+                  PaddingLeft: =40
+                  PaddingRight: =40
+                  Width: =App.Width
+                Children:
+                  - chkIncompleteConfirm:
+                      Control: CheckBox@2.1.0
+                      Properties:
+                        Text: ="I confirm incomplete items were intentional"
+                        Visible: =CountRows(Filter(ShiftChecklistItems, Shift = varCurrentShift && CompletionStatus.Value = "Not Complete")) > 0
+            - contFooter:
+                Control: GroupContainer@1.4.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutJustifyContent: =LayoutJustifyContent.End
+                  LayoutGap: =20
+                  PaddingRight: =40
+                  Width: =App.Width
+                Children:
+                  - btnCompleteShift:
+                      Control: FluentV8/Button@1.5.13
+                      Properties:
+                        Alignment: =Align.Center
+                        BorderRadius: =100
+                        ButtonType: ='Button.ButtonType'.Primary
+                        FillColor: =varForest
+                        FontSize: =11
+                        Height: =44
+                        HoverFillColor: =varForest
+                        DisplayMode: =If(
+                            varCurrentShift.Status.Value = "Completed",
+                            DisplayMode.View,
+                            If(
+                                CountRows(Filter(ShiftChecklistItems, Shift = varCurrentShift && CompletionStatus.Value = "Not Complete")) > 0 && !chkIncompleteConfirm.Value,
+                                DisplayMode.Disabled,
+                                DisplayMode.Edit
+                            )
+                        )
+                        OnSelect: |-
+                          =Patch(
+                              DailyShifts,
+                              varCurrentShift,
+                              {
+                                  Status: { Value: "Completed" },
+                                  EndTime: Now(),
+                                  CompletionConfirmed: chkIncompleteConfirm.Value
+                              }
+                          );
+                          Navigate(MainOverviewScreen, ScreenTransition.Cover)
+                        Text: ="Complete Shift"
+                        Width: =160

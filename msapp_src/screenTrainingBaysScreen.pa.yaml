@@ -1,0 +1,203 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  TrainingBaysScreen:
+    Properties:
+      Fill: =RGBA(255, 255, 255, 1)
+      LoadingSpinnerColor: =varSky
+    Children:
+      - contPage:
+          Control: GroupContainer@1.4.0
+          Variant: AutoLayout
+          Properties:
+            Height: =App.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =20
+            Width: =App.Width
+          Children:
+            - contHeader:
+                Control: GroupContainer@1.4.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.Semilight
+                  Height: =75
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                  LayoutMaxHeight: =75
+                  LayoutMinHeight: =75
+                  Width: =App.Width
+                Children:
+                  - contHeaderLeft:
+                      Control: GroupContainer@1.4.0
+                      Variant: ManualLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Center
+                        Height: =75
+                        LayoutMaxWidth: =280
+                        LayoutMinHeight: =75
+                        Width: =App.Width
+                      Children:
+                        - logo:
+                            Control: Image@2.2.3
+                            Properties:
+                              Height: =47
+                              Image: ='app-icon-ball-checkout'
+                              Width: =47
+                              X: =15
+                              Y: =15
+                        - lblPageTitle:
+                            Control: Label@2.5.1
+                            Properties:
+                              AutoHeight: =true
+                              Color: =varSky
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              Size: =14
+                              Text: ="Training Bays"
+                              Width: =260
+                              X: =80
+                              Y: =21
+                  - contHeaderRight:
+                      Control: GroupContainer@1.4.0
+                      Variant: ManualLayout
+                      Properties:
+                        Height: =75
+                        LayoutMaxWidth: =170
+                        LayoutMinHeight: =75
+                        PaddingRight: =20
+                        Width: =App.Width
+                      Children:
+                        - lblBack:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Right
+                              AutoHeight: =true
+                              Color: =varForest300
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              OnSelect: =Navigate(RetailAreaScreen, ScreenTransition.UnCover)
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =12
+                              Text: ="Back"
+                              Width: =Parent.Width-20
+                              X: =contHeaderRight.Width-Self.Width-20
+                              Y: =contHeaderRight.Height/2-10
+            - galChecklist:
+                Control: Gallery@2.15.0
+                Variant: BrowseLayout_Vertical_TwoTextVariant_pcfCore
+                Properties:
+                  BorderColor: =RGBA(243, 242, 241, 1)
+                  FillPortions: =1
+                  FocusedBorderColor: =RGBA(98, 100, 167, 1)
+                  FocusedBorderThickness: =2
+                  Items: =Filter(ShiftChecklistItems, Shift = varCurrentShift && ScreenName = "Training Bays")
+                  LayoutMaxWidth: =
+                  TemplatePadding: =15
+                  TemplateSize: =120
+                  Width: =App.Width
+                Children:
+                  - contRow:
+                      Control: GroupContainer@1.4.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.Semilight
+                        Height: =110
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =20
+                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                        PaddingLeft: =25
+                        PaddingRight: =25
+                        RadiusBottomLeft: =40
+                        RadiusBottomRight: =40
+                        RadiusTopLeft: =40
+                        RadiusTopRight: =40
+                        Width: =galChecklist.Width - 40
+                      Children:
+                        - lblItem:
+                            Control: Label@2.5.1
+                            Properties:
+                              AutoHeight: =true
+                              Color: =varForest
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Size: =12
+                              Text: =ThisItem.ItemLabel
+                              Width: =Parent.Width * 0.4
+                        - tglComplete:
+                            Control: Toggle@2.1.0
+                            Properties:
+                              Default: =ThisItem.CompletionStatus.Value = "Complete"
+                              DisplayMode: =If(varCurrentShift.Status.Value = "Completed", DisplayMode.View, DisplayMode.Edit)
+                              FalseText: ="Not Complete"
+                              OnCheck: =Patch(ShiftChecklistItems, ThisItem, { CompletionStatus: { Value: "Complete" } })
+                              OnUncheck: =Patch(ShiftChecklistItems, ThisItem, { CompletionStatus: { Value: "Not Complete" } })
+                              TrueText: ="Complete"
+                              Width: =170
+                        - txtNotes:
+                            Control: TextInput@0.0.54
+                            Properties:
+                              Appearance: ='TextInputCanvas.Appearance'.FilledDarker
+                              BasePaletteColor: =varSand
+                              BorderColor: =RGBA(255, 255, 255, 1)
+                              BorderRadius: =20
+                              BorderStyle: =BorderStyle.None
+                              Default: =ThisItem.Notes
+                              DisplayMode: =If(varCurrentShift.Status.Value = "Completed", DisplayMode.View, DisplayMode.Edit)
+                              Height: =70
+                              HintText: ="Notes"
+                              OnChange: =Patch(ShiftChecklistItems, ThisItem, { Notes: Self.Text })
+                              PaddingLeft: =15
+                              Width: =Parent.Width * 0.3
+            - contFooter:
+                Control: GroupContainer@1.4.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                  LayoutGap: =20
+                  PaddingLeft: =40
+                  PaddingRight: =40
+                  Width: =App.Width
+                Children:
+                  - btnBack:
+                      Control: FluentV8/Button@1.5.13
+                      Properties:
+                        Alignment: =Align.Center
+                        BorderRadius: =100
+                        ButtonType: ='Button.ButtonType'.Secondary
+                        FillColor: =varSand
+                        FontSize: =11
+                        Height: =44
+                        HoverFillColor: =varForest200
+                        OnSelect: =Navigate(RetailAreaScreen, ScreenTransition.UnCover)
+                        Text: ="Back"
+                        Width: =120
+                  - btnNext:
+                      Control: FluentV8/Button@1.5.13
+                      Properties:
+                        Alignment: =Align.Center
+                        BorderRadius: =100
+                        ButtonType: ='Button.ButtonType'.Primary
+                        FillColor: =varForest
+                        FontSize: =11
+                        Height: =44
+                        HoverFillColor: =varForest
+                        OnSelect: =Navigate(LoungePrivateBaysScreen, ScreenTransition.Cover)
+                        Text: ="Next"
+                        Width: =120

@@ -1,0 +1,292 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  StartShiftScreen:
+    Properties:
+      Fill: =RGBA(255, 255, 255, 1)
+      LoadingSpinnerColor: =varSky
+    Children:
+      - contPage:
+          Control: GroupContainer@1.4.0
+          Variant: AutoLayout
+          Properties:
+            Height: =App.Height
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =25
+            Width: =App.Width
+          Children:
+            - contHeader:
+                Control: GroupContainer@1.4.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.Semilight
+                  Height: =75
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                  LayoutMaxHeight: =75
+                  LayoutMinHeight: =75
+                  LayoutWrap: =true
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Width: =App.Width
+                Children:
+                  - contHeaderLeft:
+                      Control: GroupContainer@1.4.0
+                      Variant: ManualLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Center
+                        DropShadow: =DropShadow.None
+                        Height: =75
+                        LayoutMaxWidth: =300
+                        LayoutMinHeight: =75
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =App.Width
+                      Children:
+                        - logo:
+                            Control: Image@2.2.3
+                            Properties:
+                              BorderColor: =RGBA(0, 0, 0, 0)
+                              BorderStyle: =BorderStyle.None
+                              BorderThickness: =2
+                              DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                              DisabledFill: =RGBA(0, 0, 0, 0)
+                              Height: =47
+                              HoverBorderColor: =RGBA(0, 0, 0, 0)
+                              HoverFill: =RGBA(0, 0, 0, 0)
+                              Image: ='app-icon-ball-checkout'
+                              PressedBorderColor: =RGBA(0, 0, 0, 0)
+                              PressedFill: =RGBA(0, 0, 0, 0)
+                              RadiusBottomLeft: =3
+                              RadiusBottomRight: =3
+                              RadiusTopLeft: =3
+                              RadiusTopRight: =3
+                              Width: =47
+                              X: =15
+                              Y: =15
+                        - lblPageTitle:
+                            Control: Label@2.5.1
+                            Properties:
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =varSky
+                              DisabledColor: =RGBA(200, 198, 196, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =88
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              Size: =14
+                              Text: ="Daily Operations"
+                              Width: =210
+                              X: =80
+                              Y: =21
+                  - contHeaderRight:
+                      Control: GroupContainer@1.4.0
+                      Variant: ManualLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        Height: =75
+                        LayoutMaxWidth: =155
+                        LayoutMinHeight: =75
+                        PaddingRight: =20
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =App.Width
+                      Children:
+                        - lblDate:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Right
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =varForest300
+                              DisabledColor: =RGBA(200, 198, 196, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =88
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =12
+                              Text: =Text(Today(), "ddd, mmm d")
+                              Width: =Parent.Width-30
+                              X: =contHeaderRight.Width-Self.Width-30
+                              Y: =contHeaderRight.Height/2-10
+            - contBody:
+                Control: GroupContainer@1.4.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  FillPortions: =1
+                  Height: =300
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =20
+                  LayoutJustifyContent: =LayoutJustifyContent.Center
+                  Width: =App.Width - 80
+                Children:
+                  - lblEmployee:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        Color: =varForest300
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Size: =16
+                        Text: ="Select employee to start shift"
+                        Width: =Parent.Width
+                  - ddEmployee:
+                      Control: DropDown@0.0.45
+                      Properties:
+                        BasePaletteColor: =varSky
+                        BorderRadius: =100
+                        Items: =AddColumns(Filter(Employees, IsActive), "Value", EmployeeName)
+                        LayoutMaxWidth: =400
+                        PaddingLeft: =25
+                        PaddingRight: =15
+                        Width: =Parent.Width
+                  - contButtons:
+                      Control: GroupContainer@1.4.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =20
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        Width: =Parent.Width
+                      Children:
+                        - btnStartOpen:
+                            Control: FluentV8/Button@1.5.13
+                            Properties:
+                              Alignment: =Align.Center
+                              BorderRadius: =100
+                              ButtonType: ='Button.ButtonType'.Primary
+                              FillColor: =varForest
+                              FontSize: =11
+                              Height: =44
+                              HoverFillColor: =varForest
+                              OnSelect: |-
+                                =Set(
+                                    varCurrentShift,
+                                    Patch(
+                                        DailyShifts,
+                                        Defaults(DailyShifts),
+                                        {
+                                            Employee: LookUp(Employees, EmployeeID = ddEmployee.Selected.EmployeeID),
+                                            ShiftType: { Value: "Open" },
+                                            ShiftDate: Today(),
+                                            StartTime: Now(),
+                                            Status: { Value: "In Progress" }
+                                        }
+                                    )
+                                );
+                                Patch(
+                                    DailyShifts,
+                                    varCurrentShift,
+                                    { DailyShiftName: Text(varCurrentShift.ShiftID) }
+                                );
+                                ForAll(
+                                    Table(
+                                        { ScreenName: "Reception Setup", ItemLabel: "Retrieve bank bag" },
+                                        { ScreenName: "Reception Setup", ItemLabel: "Count cash and set register to $200" },
+                                        { ScreenName: "Reception Setup", ItemLabel: "Launch Teams & Outlook" },
+                                        { ScreenName: "Reception Setup", ItemLabel: "Launch Mindbody Business app" },
+                                        { ScreenName: "Reception Setup", ItemLabel: "Launch Open Close app" },
+                                        { ScreenName: "Retail Area", ItemLabel: "Products organized and displayed" },
+                                        { ScreenName: "Training Bays", ItemLabel: "Power on computers and bay systems" },
+                                        { ScreenName: "Training Bays", ItemLabel: "Launch Foresight and Swing Catalyst" },
+                                        { ScreenName: "Lounge & Private Bays", ItemLabel: "Power on TVs and displays" },
+                                        { ScreenName: "Facility Readiness", ItemLabel: "Restock restroom supplies" }
+                                    ),
+                                    Patch(
+                                        ShiftChecklistItems,
+                                        Defaults(ShiftChecklistItems),
+                                        {
+                                            Shift: varCurrentShift,
+                                            ScreenName: ThisRecord.ScreenName,
+                                            SectionName: ThisRecord.ScreenName,
+                                            ItemLabel: ThisRecord.ItemLabel,
+                                            CompletionStatus: { Value: "Not Complete" },
+                                            IsRequired: true
+                                        }
+                                    )
+                                );
+                                Navigate(ReceptionSetupScreen, ScreenTransition.Cover)
+                              Text: ="Start Opening"
+                              Width: =160
+                        - btnStartClose:
+                            Control: FluentV8/Button@1.5.13
+                            Properties:
+                              Alignment: =Align.Center
+                              BorderRadius: =100
+                              ButtonType: ='Button.ButtonType'.Primary
+                              FillColor: =varMountain
+                              FontSize: =11
+                              Height: =44
+                              HoverFillColor: =varForest
+                              OnSelect: |-
+                                =Set(
+                                    varCurrentShift,
+                                    Patch(
+                                        DailyShifts,
+                                        Defaults(DailyShifts),
+                                        {
+                                            Employee: LookUp(Employees, EmployeeID = ddEmployee.Selected.EmployeeID),
+                                            ShiftType: { Value: "Close" },
+                                            ShiftDate: Today(),
+                                            StartTime: Now(),
+                                            Status: { Value: "In Progress" }
+                                        }
+                                    )
+                                );
+                                Patch(
+                                    DailyShifts,
+                                    varCurrentShift,
+                                    { DailyShiftName: Text(varCurrentShift.ShiftID) }
+                                );
+                                ForAll(
+                                    Table(
+                                        { ScreenName: "Reception Setup", ItemLabel: "Retrieve bank bag" },
+                                        { ScreenName: "Reception Setup", ItemLabel: "Count cash and set register to $200" },
+                                        { ScreenName: "Reception Setup", ItemLabel: "Launch Teams & Outlook" },
+                                        { ScreenName: "Reception Setup", ItemLabel: "Launch Mindbody Business app" },
+                                        { ScreenName: "Reception Setup", ItemLabel: "Launch Open Close app" },
+                                        { ScreenName: "Retail Area", ItemLabel: "Products organized and displayed" },
+                                        { ScreenName: "Training Bays", ItemLabel: "Power on computers and bay systems" },
+                                        { ScreenName: "Training Bays", ItemLabel: "Launch Foresight and Swing Catalyst" },
+                                        { ScreenName: "Lounge & Private Bays", ItemLabel: "Power on TVs and displays" },
+                                        { ScreenName: "Facility Readiness", ItemLabel: "Restock restroom supplies" }
+                                    ),
+                                    Patch(
+                                        ShiftChecklistItems,
+                                        Defaults(ShiftChecklistItems),
+                                        {
+                                            Shift: varCurrentShift,
+                                            ScreenName: ThisRecord.ScreenName,
+                                            SectionName: ThisRecord.ScreenName,
+                                            ItemLabel: ThisRecord.ItemLabel,
+                                            CompletionStatus: { Value: "Not Complete" },
+                                            IsRequired: true
+                                        }
+                                    )
+                                );
+                                Navigate(ReceptionSetupScreen, ScreenTransition.Cover)
+                              Text: ="Start Closing"
+                              Width: =160
