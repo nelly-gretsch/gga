@@ -1,0 +1,40 @@
+<ImportExportXml version="9.2.25123.166" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.25123.166" OrganizationSchemaType="Core" CRMServerServiceabilityVersion="9.2.25123.00166">
+  <SolutionManifest>
+    <UniqueName>ExportComponentsc3465b63673f43379874f0f34f4b358a</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="ExportComponentsc3465b63673f43379874f0f34f4b358a" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>Cre7fca</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="CDS Default Publisher" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>crb6c</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>51927</CustomizationOptionValuePrefix>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="crb6c_ballsleevelog" behavior="0" />
+      <RootComponent type="1" schemaName="crb6c_employees" behavior="0" />
+      <RootComponent type="1" schemaName="crb6c_opencloseareas" behavior="0" />
+      <RootComponent type="1" schemaName="crb6c_opencloseshiftlog" behavior="0" />
+      <RootComponent type="1" schemaName="crb6c_opencloseshifttype" behavior="0" />
+      <RootComponent type="1" schemaName="crb6c_openclosetasklog" behavior="0" />
+      <RootComponent type="1" schemaName="crb6c_openclosetasks" behavior="0" />
+      <RootComponent type="9" schemaName="crb6c_golfballtypes" behavior="0" />
+      <RootComponent type="9" schemaName="crb6c_resources" behavior="0" />
+      <RootComponent type="300" schemaName="crb6c_openclose_30a53" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="9" schemaName="crb6c_employeeroles" displayName="EmployeeRoles" solution="Active" />
+        <Dependent type="2" schemaName="crb6c_role" displayName="Role" parentSchemaName="crb6c_employees" parentDisplayName="Employees" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>
